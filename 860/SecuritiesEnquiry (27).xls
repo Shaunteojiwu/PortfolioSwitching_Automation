@@ -1,0 +1,743 @@
+<form name="ctl99" method="post" action="./SecurityEnquiry.aspx" id="ctl99">
+<div>
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="" />
+</div>
+
+
+<script src="/Ajax/Javascript/AjaxSessionTimer.js" type="text/javascript"></script>
+<script src="/Ajax/Javascript/net.js" type="text/javascript"></script><div>
+	<table cellspacing="0" cellpadding="3" rules="cols" border="1" id="gvPortType" style="background-color:White;border-color:#0000C0;border-width:1px;border-style:Groove;width:960px;border-collapse:collapse;">
+		<tr style="color:White;background-color:#000084;font-size:X-Small;font-weight:bold;">
+			<th scope="col" style="color:White;">Portfolio Type</th><th scope="col" style="color:White;">Portfolio Name</th><th scope="col" style="color:White;">Qty</th><th scope="col" style="color:White;">Total Cost</th><th scope="col" style="color:White;">Market Value (SGD)</th><th scope="col" style="color:White;">Total Portfolio</th><th scope="col" style="color:White;">% Port</th><th scope="col" style="color:White;">Gross P/L (+/-)</th>
+		</tr><tr style="color:Black;font-size:XX-Small;">
+			<td>CBP_SRS</td><td align="left">CAPITAL BUILDER PORTFOLIO (SRS)</td><td align="right">
+                                <span id="gvPortType_ctl06_lblscqty" style="font-size: 8pt; font-family: Verdana;">3,839.0090</span>
+                            </td><td align="right">
+                                <span id="gvPortType_ctl06_lblsctotalcost" style="font-size: 8pt; font-family: Verdana;">129,815.25</span>
+                            </td><td align="right">
+                                <span id="gvPortType_ctl06_lblscmarketvalue" style="font-size: 8pt; font-family: Verdana;">152,047.02</span>
+                            </td><td align="right">
+                                <span id="gvPortType_ctl06_lblsctotalportfolio" style="font-size: 8pt; font-family: Verdana;">802,617.00</span>
+                            </td><td align="right">
+                                <span id="gvPortType_ctl06_lblscportpctg" style="font-size: 8pt; font-family: Verdana;">18.94</span>
+                            </td><td align="right">
+                                <span id="gvPortType_ctl06_lblscpl" style="font-size: 8pt; font-family: Verdana;">22,231.77</span>
+                            </td>
+		</tr><tr style="color:Black;background-color:#CCCCCC;font-size:XX-Small;">
+			<td align="right" style="font-weight:bold;">Total :</td><td>&nbsp;</td><td align="right">
+                                    <span id="gvPortType_ctl07_lblFscqty" style="font-weight:bold;font-size: 8pt; font-family: Verdana;">3,839.0100</span>
+                                </td><td align="right">
+                                    <span id="gvPortType_ctl07_lblFsctotalcost" style="font-weight:bold;font-size: 8pt; font-family: Verdana;">129,815.25</span>
+                                </td><td align="right">
+                                    <span id="gvPortType_ctl07_lblFscmarketvalue" style="font-weight:bold;font-size: 8pt; font-family: Verdana;">152,047.02</span>
+                                </td><td align="right">
+                                    <span id="gvPortType_ctl07_lblFsctotalportfolio" style="font-weight:bold;font-size: 8pt; font-family: Verdana;">802,617.00</span>
+                                </td><td align="right">
+                                    <span id="gvPortType_ctl07_lblFscportpctg" style="font-weight:bold;font-size: 8pt; font-family: Verdana;">0.19</span>
+                                </td><td align="right">
+                                    <span id="gvPortType_ctl07_lblFscpl" style="font-weight:bold;font-size: 8pt; font-family: Verdana;">22,231.77</span>
+                                </td>
+		</tr>
+	</table>
+</div><span id="lblProdName" style="color:#330099;font-size:Small;font-weight:bold;font-size: 8pt; font-family: Verdana;">CAPITAL GROUP NEW PERSPECTIVE B (SGD) ACC</span><table id="tblProductInfo" border="0" cellpadding="0" cellspacing="0" style="border-right: #ccffff thin solid; border-top: #ccffff thin solid; border-left: #ccffff thin solid;
+                        border-bottom: #ccffff thin solid" width="960px">
+	<tr>
+		<td style="width: 101px; height: 13px">
+                                <span id="lblCompCodelbl" class="TextInputLabel" style="display:inline-block;color:DarkBlue;width:112px;font-size: 8pt; font-family: Verdana;"> Code :</span></td>
+		<td style="height: 13px">
+                                <span id="lblcolonCompCode" class="TextInputLabel" style="display:inline-block;color:DarkBlue;width:8px;font-size: 8pt; font-family: Verdana;">:</span></td>
+		<td style="height: 13px">
+                                <span id="lblCompCode" class="TextInputLabel" style="display:inline-block;color:Blue;width:20px;font-size: 8pt; font-family: Verdana;">617312</span></td>
+		<td style="width: 111px; height: 13px">
+                                <span id="lblProductlbl" class="TextInputLabel" style="display:inline-block;color:DarkBlue;width:112px;font-size: 8pt; font-family: Verdana;"> Product</span></td>
+		<td style="height: 13px">
+                                <span id="lblcolonProduct" class="TextInputLabel" style="display:inline-block;color:DarkBlue;width:8px;font-size: 8pt; font-family: Verdana;">:</span></td>
+		<td style="height: 13px">
+                                <span id="lblProduct" class="TextInputLabel" style="color:Blue;font-size: 8pt; font-family: Verdana;">Unit Trusts</span></td>
+		<td align="right" style="width: 114px; height: 13px">
+                                <span id="lblDate" class="TextInputLabel" style="display:inline-block;color:#C000C0;width:20px;font-size: 8pt; font-family: Verdana;">24/06/2026</span></td>
+		<td style="height: 13px">
+                            </td>
+		<td style="height: 13px">
+                                <span id="lblTime" class="TextInputLabel" style="display:inline-block;color:#C000C0;width:20px;font-size: 8pt; font-family: Verdana;">11:51:57</span></td>
+	</tr>
+	<tr>
+		<td style="width: 101px; height: 15px">
+                                <span id="lblCtyTradedlbl" class="TextInputLabel" style="display:inline-block;color:DarkBlue;width:112px;font-size: 8pt; font-family: Verdana;"> Country Traded</span></td>
+		<td style="height: 15px">
+                                <span id="lblcolonctyTraded" class="TextInputLabel" style="display:inline-block;color:DarkBlue;width:8px;font-size: 8pt; font-family: Verdana;">:</span></td>
+		<td style="height: 15px">
+                                <span id="lblCtyTraded" class="TextInputLabel" style="display:inline-block;color:Blue;width:20px;font-size: 8pt; font-family: Verdana;">Global</span></td>
+		<td style="width: 111px; height: 15px">
+                                <span id="lblCcyTradedlbl" class="TextInputLabel" style="display:inline-block;color:DarkBlue;width:118px;font-size: 8pt; font-family: Verdana;"> Currency Traded</span></td>
+		<td style="height: 15px">
+                                <span id="lblcolonCcyTraded" class="TextInputLabel" style="display:inline-block;color:DarkBlue;width:8px;font-size: 8pt; font-family: Verdana;">:</span></td>
+		<td style="height: 15px">
+                                <span id="lblCcyTraded" class="TextInputLabel" style="display:inline-block;color:Blue;width:20px;font-size: 8pt; font-family: Verdana;">SGD</span></td>
+		<td style="width: 114px; height: 13px">
+                                <span id="lblSeccodelbl" class="TextInputLabel" style="display:inline-block;color:DarkBlue;width:98px;font-size: 8pt; font-family: Verdana;"></span></td>
+		<td style="height: 13px">
+                                <span id="lblcolonSeccode" class="TextInputLabel" style="display:inline-block;color:DarkBlue;width:8px;font-size: 8pt; font-family: Verdana;"></span></td>
+		<td style="height: 13px">
+                                <span id="lblSecCode" class="TextInputLabel" style="display:inline-block;color:Blue;width:20px;font-size: 8pt; font-family: Verdana;"></span></td>
+	</tr>
+	<tr>
+		<td style="width: 101px">
+                                <span id="Label4" class="TextInputLabel" style="display:inline-block;color:DarkBlue;width:96px;font-size: 8pt; font-family: Verdana;">Price (Base)</span></td>
+		<td>
+                                <span id="lblcolonprice" class="TextInputLabel" style="display:inline-block;color:DarkBlue;width:8px;font-size: 8pt; font-family: Verdana;">:</span></td>
+		<td>
+                                <span id="lblLastDonetb" class="TextInputLabel" style="display:inline-block;color:Blue;width:20px;font-size: 8pt; font-family: Verdana;">39.6058</span></td>
+		<td style="width: 111px">
+                                <span id="lblLastDonelbl" class="TextInputLabel" style="display:inline-block;color:DarkBlue;width:118px;font-size: 8pt; font-family: Verdana;">Price (Traded)</span></td>
+		<td>
+                                <span id="lblcolonLastDone" class="TextInputLabel" style="display:inline-block;color:DarkBlue;width:8px;font-size: 8pt; font-family: Verdana;">:</span></td>
+		<td>
+                                <span id="lblLastDonet" class="TextInputLabel" style="display:inline-block;color:Blue;width:20px;font-size: 8pt; font-family: Verdana;">39.6058</span></td>
+		<td style="width: 114px">
+                                <span id="lblMarketCodelbl" class="TextInputLabel" style="display:inline-block;color:DarkBlue;width:98px;font-size: 8pt; font-family: Verdana;"></span></td>
+		<td>
+                                <span id="lblcolonMarketCode" class="TextInputLabel" style="display:inline-block;color:DarkBlue;width:8px;font-size: 8pt; font-family: Verdana;"></span></td>
+		<td>
+                                <span id="lblMarketCode" class="TextInputLabel" style="color:Blue;font-size: 8pt; font-family: Verdana;"></span></td>
+	</tr>
+</table>
+<div>
+	<table cellspacing="0" cellpadding="1" rules="all" border="1" id="gvAcctBySecCode" style="background-color:White;border-color:#000099;border-width:1px;border-style:solid;font-size:XX-Small;width:99.5%;border-collapse:collapse;">
+		<tr style="color:#4A3C8C;background-color:#E7E7FF;">
+			<td>
+                                                    <span id="gvAcctBySecCode_ctl26_lblNo" style="display:inline-block;width:17px;font-size: 8pt; font-family: Verdana;">1</span>
+                                                </td><td>
+                                                    <span id="gvAcctBySecCode_ctl26_lblSubAcctNoSc" style="display:inline-block;width:78px;font-size: 8pt; font-family: Verdana;">2160811</span>
+                                                    
+                                                </td><td align="center">
+                                                    <span id="gvAcctBySecCode_ctl26_lblPModelCodeSc" style="display:inline-block;width:30px;font-size: 8pt; font-family: Verdana;">CBP_SRS</span>
+                                                </td><td align="center">
+                                                    <span id="gvAcctBySecCode_ctl26_lblCurrencySc" style="display:inline-block;width:15px;font-size: 8pt; font-family: Verdana;">SGD</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl26_lblQtySc" style="display:inline-block;width:75px;font-size: 8pt; font-family: Verdana;">1384.2780</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl26_lblAvgCostSc" style="display:inline-block;width:70px;font-size: 8pt; font-family: Verdana;">32.9972</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl26_lblTotalCostSc" style="display:inline-block;width:86px;font-size: 8pt; font-family: Verdana;">45,677.36</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl26_lblMarketValueSc" style="display:inline-block;width:90px;font-size: 8pt; font-family: Verdana;">54,825.44</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl26_lblPortValueSc" style="display:inline-block;width:96px;font-size: 8pt; font-family: Verdana;">292,990.23</span>
+                                                    
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl26_lblPortfolioPctgSc" style="display:inline-block;width:36px;font-size: 8pt; font-family: Verdana;">18.71</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl26_lblGrossPLSc" style="display:inline-block;width:72px;font-size: 8pt; font-family: Verdana;">9,148.08</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl26_lblGrossPLScPctg" style="display:inline-block;width:45px;font-size: 8pt; font-family: Verdana;">20.03</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl26_lblTotalCNESc" style="display:inline-block;width:49px;font-size: 8pt; font-family: Verdana;">-0.75</span>
+                                                </td>
+		</tr><tr style="color:#4A3C8C;background-color:#F7F7F7;">
+			<td>
+                                                    <span id="gvAcctBySecCode_ctl27_lblNo" style="display:inline-block;width:17px;font-size: 8pt; font-family: Verdana;">2</span>
+                                                </td><td>
+                                                    <span id="gvAcctBySecCode_ctl27_lblSubAcctNoSc" style="display:inline-block;width:78px;font-size: 8pt; font-family: Verdana;">2160847</span>
+                                                    
+                                                </td><td align="center">
+                                                    <span id="gvAcctBySecCode_ctl27_lblPModelCodeSc" style="display:inline-block;width:30px;font-size: 8pt; font-family: Verdana;">CBP_SRS</span>
+                                                </td><td align="center">
+                                                    <span id="gvAcctBySecCode_ctl27_lblCurrencySc" style="display:inline-block;width:15px;font-size: 8pt; font-family: Verdana;">SGD</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl27_lblQtySc" style="display:inline-block;width:75px;font-size: 8pt; font-family: Verdana;">462.4920</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl27_lblAvgCostSc" style="display:inline-block;width:70px;font-size: 8pt; font-family: Verdana;">33.0352</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl27_lblTotalCostSc" style="display:inline-block;width:86px;font-size: 8pt; font-family: Verdana;">15,278.51</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl27_lblMarketValueSc" style="display:inline-block;width:90px;font-size: 8pt; font-family: Verdana;">18,317.37</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl27_lblPortValueSc" style="display:inline-block;width:96px;font-size: 8pt; font-family: Verdana;">97,840.31</span>
+                                                    
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl27_lblPortfolioPctgSc" style="display:inline-block;width:36px;font-size: 8pt; font-family: Verdana;">18.72</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl27_lblGrossPLSc" style="display:inline-block;width:72px;font-size: 8pt; font-family: Verdana;">3,038.86</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl27_lblGrossPLScPctg" style="display:inline-block;width:45px;font-size: 8pt; font-family: Verdana;">19.89</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl27_lblTotalCNESc" style="display:inline-block;width:49px;font-size: 8pt; font-family: Verdana;">-0.75</span>
+                                                </td>
+		</tr><tr style="color:#4A3C8C;background-color:#E7E7FF;">
+			<td>
+                                                    <span id="gvAcctBySecCode_ctl28_lblNo" style="display:inline-block;width:17px;font-size: 8pt; font-family: Verdana;">3</span>
+                                                </td><td>
+                                                    <span id="gvAcctBySecCode_ctl28_lblSubAcctNoSc" style="display:inline-block;width:78px;font-size: 8pt; font-family: Verdana;">2160933</span>
+                                                    
+                                                </td><td align="center">
+                                                    <span id="gvAcctBySecCode_ctl28_lblPModelCodeSc" style="display:inline-block;width:30px;font-size: 8pt; font-family: Verdana;">CBP_SRS</span>
+                                                </td><td align="center">
+                                                    <span id="gvAcctBySecCode_ctl28_lblCurrencySc" style="display:inline-block;width:15px;font-size: 8pt; font-family: Verdana;">SGD</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl28_lblQtySc" style="display:inline-block;width:75px;font-size: 8pt; font-family: Verdana;">63.4680</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl28_lblAvgCostSc" style="display:inline-block;width:70px;font-size: 8pt; font-family: Verdana;">32.9799</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl28_lblTotalCostSc" style="display:inline-block;width:86px;font-size: 8pt; font-family: Verdana;">2,093.17</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl28_lblMarketValueSc" style="display:inline-block;width:90px;font-size: 8pt; font-family: Verdana;">2,513.70</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl28_lblPortValueSc" style="display:inline-block;width:96px;font-size: 8pt; font-family: Verdana;">13,433.71</span>
+                                                    
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl28_lblPortfolioPctgSc" style="display:inline-block;width:36px;font-size: 8pt; font-family: Verdana;">18.71</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl28_lblGrossPLSc" style="display:inline-block;width:72px;font-size: 8pt; font-family: Verdana;">420.53</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl28_lblGrossPLScPctg" style="display:inline-block;width:45px;font-size: 8pt; font-family: Verdana;">20.09</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl28_lblTotalCNESc" style="display:inline-block;width:49px;font-size: 8pt; font-family: Verdana;">-0.74</span>
+                                                </td>
+		</tr><tr style="color:#4A3C8C;background-color:#F7F7F7;">
+			<td>
+                                                    <span id="gvAcctBySecCode_ctl29_lblNo" style="display:inline-block;width:17px;font-size: 8pt; font-family: Verdana;">4</span>
+                                                </td><td>
+                                                    <span id="gvAcctBySecCode_ctl29_lblSubAcctNoSc" style="display:inline-block;width:78px;font-size: 8pt; font-family: Verdana;">2160934</span>
+                                                    
+                                                </td><td align="center">
+                                                    <span id="gvAcctBySecCode_ctl29_lblPModelCodeSc" style="display:inline-block;width:30px;font-size: 8pt; font-family: Verdana;">CBP_SRS</span>
+                                                </td><td align="center">
+                                                    <span id="gvAcctBySecCode_ctl29_lblCurrencySc" style="display:inline-block;width:15px;font-size: 8pt; font-family: Verdana;">SGD</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl29_lblQtySc" style="display:inline-block;width:75px;font-size: 8pt; font-family: Verdana;">63.4680</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl29_lblAvgCostSc" style="display:inline-block;width:70px;font-size: 8pt; font-family: Verdana;">32.9799</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl29_lblTotalCostSc" style="display:inline-block;width:86px;font-size: 8pt; font-family: Verdana;">2,093.17</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl29_lblMarketValueSc" style="display:inline-block;width:90px;font-size: 8pt; font-family: Verdana;">2,513.70</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl29_lblPortValueSc" style="display:inline-block;width:96px;font-size: 8pt; font-family: Verdana;">13,433.71</span>
+                                                    
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl29_lblPortfolioPctgSc" style="display:inline-block;width:36px;font-size: 8pt; font-family: Verdana;">18.71</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl29_lblGrossPLSc" style="display:inline-block;width:72px;font-size: 8pt; font-family: Verdana;">420.53</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl29_lblGrossPLScPctg" style="display:inline-block;width:45px;font-size: 8pt; font-family: Verdana;">20.09</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl29_lblTotalCNESc" style="display:inline-block;width:49px;font-size: 8pt; font-family: Verdana;">-0.74</span>
+                                                </td>
+		</tr><tr style="color:#4A3C8C;background-color:#E7E7FF;">
+			<td>
+                                                    <span id="gvAcctBySecCode_ctl30_lblNo" style="display:inline-block;width:17px;font-size: 8pt; font-family: Verdana;">5</span>
+                                                </td><td>
+                                                    <span id="gvAcctBySecCode_ctl30_lblSubAcctNoSc" style="display:inline-block;width:78px;font-size: 8pt; font-family: Verdana;">2160970</span>
+                                                    
+                                                </td><td align="center">
+                                                    <span id="gvAcctBySecCode_ctl30_lblPModelCodeSc" style="display:inline-block;width:30px;font-size: 8pt; font-family: Verdana;">CBP_SRS</span>
+                                                </td><td align="center">
+                                                    <span id="gvAcctBySecCode_ctl30_lblCurrencySc" style="display:inline-block;width:15px;font-size: 8pt; font-family: Verdana;">SGD</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl30_lblQtySc" style="display:inline-block;width:75px;font-size: 8pt; font-family: Verdana;">246.9880</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl30_lblAvgCostSc" style="display:inline-block;width:70px;font-size: 8pt; font-family: Verdana;">34.0481</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl30_lblTotalCostSc" style="display:inline-block;width:86px;font-size: 8pt; font-family: Verdana;">8,409.47</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl30_lblMarketValueSc" style="display:inline-block;width:90px;font-size: 8pt; font-family: Verdana;">9,782.16</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl30_lblPortValueSc" style="display:inline-block;width:96px;font-size: 8pt; font-family: Verdana;">51,939.16</span>
+                                                    
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl30_lblPortfolioPctgSc" style="display:inline-block;width:36px;font-size: 8pt; font-family: Verdana;">18.83</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl30_lblGrossPLSc" style="display:inline-block;width:72px;font-size: 8pt; font-family: Verdana;">1,372.69</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl30_lblGrossPLScPctg" style="display:inline-block;width:45px;font-size: 8pt; font-family: Verdana;">16.32</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl30_lblTotalCNESc" style="display:inline-block;width:49px;font-size: 8pt; font-family: Verdana;">-0.75</span>
+                                                </td>
+		</tr><tr style="color:#4A3C8C;background-color:#F7F7F7;">
+			<td>
+                                                    <span id="gvAcctBySecCode_ctl31_lblNo" style="display:inline-block;width:17px;font-size: 8pt; font-family: Verdana;">6</span>
+                                                </td><td>
+                                                    <span id="gvAcctBySecCode_ctl31_lblSubAcctNoSc" style="display:inline-block;width:78px;font-size: 8pt; font-family: Verdana;">2161004</span>
+                                                    
+                                                </td><td align="center">
+                                                    <span id="gvAcctBySecCode_ctl31_lblPModelCodeSc" style="display:inline-block;width:30px;font-size: 8pt; font-family: Verdana;">CBP_SRS</span>
+                                                </td><td align="center">
+                                                    <span id="gvAcctBySecCode_ctl31_lblCurrencySc" style="display:inline-block;width:15px;font-size: 8pt; font-family: Verdana;">SGD</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl31_lblQtySc" style="display:inline-block;width:75px;font-size: 8pt; font-family: Verdana;">127.9630</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl31_lblAvgCostSc" style="display:inline-block;width:70px;font-size: 8pt; font-family: Verdana;">33.0983</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl31_lblTotalCostSc" style="display:inline-block;width:86px;font-size: 8pt; font-family: Verdana;">4,235.36</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl31_lblMarketValueSc" style="display:inline-block;width:90px;font-size: 8pt; font-family: Verdana;">5,068.08</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl31_lblPortValueSc" style="display:inline-block;width:96px;font-size: 8pt; font-family: Verdana;">26,847.47</span>
+                                                    
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl31_lblPortfolioPctgSc" style="display:inline-block;width:36px;font-size: 8pt; font-family: Verdana;">18.88</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl31_lblGrossPLSc" style="display:inline-block;width:72px;font-size: 8pt; font-family: Verdana;">832.72</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl31_lblGrossPLScPctg" style="display:inline-block;width:45px;font-size: 8pt; font-family: Verdana;">19.66</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl31_lblTotalCNESc" style="display:inline-block;width:49px;font-size: 8pt; font-family: Verdana;">-0.75</span>
+                                                </td>
+		</tr><tr style="color:#4A3C8C;background-color:#E7E7FF;">
+			<td>
+                                                    <span id="gvAcctBySecCode_ctl32_lblNo" style="display:inline-block;width:17px;font-size: 8pt; font-family: Verdana;">7</span>
+                                                </td><td>
+                                                    <span id="gvAcctBySecCode_ctl32_lblSubAcctNoSc" style="display:inline-block;width:78px;font-size: 8pt; font-family: Verdana;">2161316</span>
+                                                    
+                                                </td><td align="center">
+                                                    <span id="gvAcctBySecCode_ctl32_lblPModelCodeSc" style="display:inline-block;width:30px;font-size: 8pt; font-family: Verdana;">CBP_SRS</span>
+                                                </td><td align="center">
+                                                    <span id="gvAcctBySecCode_ctl32_lblCurrencySc" style="display:inline-block;width:15px;font-size: 8pt; font-family: Verdana;">SGD</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl32_lblQtySc" style="display:inline-block;width:75px;font-size: 8pt; font-family: Verdana;">141.1180</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl32_lblAvgCostSc" style="display:inline-block;width:70px;font-size: 8pt; font-family: Verdana;">32.9801</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl32_lblTotalCostSc" style="display:inline-block;width:86px;font-size: 8pt; font-family: Verdana;">4,654.08</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl32_lblMarketValueSc" style="display:inline-block;width:90px;font-size: 8pt; font-family: Verdana;">5,589.09</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl32_lblPortValueSc" style="display:inline-block;width:96px;font-size: 8pt; font-family: Verdana;">29,640.24</span>
+                                                    
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl32_lblPortfolioPctgSc" style="display:inline-block;width:36px;font-size: 8pt; font-family: Verdana;">18.86</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl32_lblGrossPLSc" style="display:inline-block;width:72px;font-size: 8pt; font-family: Verdana;">935.01</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl32_lblGrossPLScPctg" style="display:inline-block;width:45px;font-size: 8pt; font-family: Verdana;">20.09</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl32_lblTotalCNESc" style="display:inline-block;width:49px;font-size: 8pt; font-family: Verdana;">-0.75</span>
+                                                </td>
+		</tr><tr style="color:#4A3C8C;background-color:#F7F7F7;">
+			<td>
+                                                    <span id="gvAcctBySecCode_ctl33_lblNo" style="display:inline-block;width:17px;font-size: 8pt; font-family: Verdana;">8</span>
+                                                </td><td>
+                                                    <span id="gvAcctBySecCode_ctl33_lblSubAcctNoSc" style="display:inline-block;width:78px;font-size: 8pt; font-family: Verdana;">2161362</span>
+                                                    
+                                                </td><td align="center">
+                                                    <span id="gvAcctBySecCode_ctl33_lblPModelCodeSc" style="display:inline-block;width:30px;font-size: 8pt; font-family: Verdana;">CBP_SRS</span>
+                                                </td><td align="center">
+                                                    <span id="gvAcctBySecCode_ctl33_lblCurrencySc" style="display:inline-block;width:15px;font-size: 8pt; font-family: Verdana;">SGD</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl33_lblQtySc" style="display:inline-block;width:75px;font-size: 8pt; font-family: Verdana;">239.2420</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl33_lblAvgCostSc" style="display:inline-block;width:70px;font-size: 8pt; font-family: Verdana;">33.3072</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl33_lblTotalCostSc" style="display:inline-block;width:86px;font-size: 8pt; font-family: Verdana;">7,968.48</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl33_lblMarketValueSc" style="display:inline-block;width:90px;font-size: 8pt; font-family: Verdana;">9,475.37</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl33_lblPortValueSc" style="display:inline-block;width:96px;font-size: 8pt; font-family: Verdana;">50,024.36</span>
+                                                    
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl33_lblPortfolioPctgSc" style="display:inline-block;width:36px;font-size: 8pt; font-family: Verdana;">18.94</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl33_lblGrossPLSc" style="display:inline-block;width:72px;font-size: 8pt; font-family: Verdana;">1,506.89</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl33_lblGrossPLScPctg" style="display:inline-block;width:45px;font-size: 8pt; font-family: Verdana;">18.91</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl33_lblTotalCNESc" style="display:inline-block;width:49px;font-size: 8pt; font-family: Verdana;">-0.75</span>
+                                                </td>
+		</tr><tr style="color:#4A3C8C;background-color:#E7E7FF;">
+			<td>
+                                                    <span id="gvAcctBySecCode_ctl34_lblNo" style="display:inline-block;width:17px;font-size: 8pt; font-family: Verdana;">9</span>
+                                                </td><td>
+                                                    <span id="gvAcctBySecCode_ctl34_lblSubAcctNoSc" style="display:inline-block;width:78px;font-size: 8pt; font-family: Verdana;">2162083</span>
+                                                    
+                                                </td><td align="center">
+                                                    <span id="gvAcctBySecCode_ctl34_lblPModelCodeSc" style="display:inline-block;width:30px;font-size: 8pt; font-family: Verdana;">CBP_SRS</span>
+                                                </td><td align="center">
+                                                    <span id="gvAcctBySecCode_ctl34_lblCurrencySc" style="display:inline-block;width:15px;font-size: 8pt; font-family: Verdana;">SGD</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl34_lblQtySc" style="display:inline-block;width:75px;font-size: 8pt; font-family: Verdana;">99.3310</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl34_lblAvgCostSc" style="display:inline-block;width:70px;font-size: 8pt; font-family: Verdana;">36.0728</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl34_lblTotalCostSc" style="display:inline-block;width:86px;font-size: 8pt; font-family: Verdana;">3,583.15</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl34_lblMarketValueSc" style="display:inline-block;width:90px;font-size: 8pt; font-family: Verdana;">3,934.08</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl34_lblPortValueSc" style="display:inline-block;width:96px;font-size: 8pt; font-family: Verdana;">20,311.71</span>
+                                                    
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl34_lblPortfolioPctgSc" style="display:inline-block;width:36px;font-size: 8pt; font-family: Verdana;">19.37</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl34_lblGrossPLSc" style="display:inline-block;width:72px;font-size: 8pt; font-family: Verdana;">350.93</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl34_lblGrossPLScPctg" style="display:inline-block;width:45px;font-size: 8pt; font-family: Verdana;">9.79</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl34_lblTotalCNESc" style="display:inline-block;width:49px;font-size: 8pt; font-family: Verdana;">0.00</span>
+                                                </td>
+		</tr><tr style="color:#4A3C8C;background-color:#F7F7F7;">
+			<td>
+                                                    <span id="gvAcctBySecCode_ctl35_lblNo" style="display:inline-block;width:17px;font-size: 8pt; font-family: Verdana;">10</span>
+                                                </td><td>
+                                                    <span id="gvAcctBySecCode_ctl35_lblSubAcctNoSc" style="display:inline-block;width:78px;font-size: 8pt; font-family: Verdana;">2162279</span>
+                                                    
+                                                </td><td align="center">
+                                                    <span id="gvAcctBySecCode_ctl35_lblPModelCodeSc" style="display:inline-block;width:30px;font-size: 8pt; font-family: Verdana;">CBP_SRS</span>
+                                                </td><td align="center">
+                                                    <span id="gvAcctBySecCode_ctl35_lblCurrencySc" style="display:inline-block;width:15px;font-size: 8pt; font-family: Verdana;">SGD</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl35_lblQtySc" style="display:inline-block;width:75px;font-size: 8pt; font-family: Verdana;">136.1130</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl35_lblAvgCostSc" style="display:inline-block;width:70px;font-size: 8pt; font-family: Verdana;">32.9800</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl35_lblTotalCostSc" style="display:inline-block;width:86px;font-size: 8pt; font-family: Verdana;">4,489.00</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl35_lblMarketValueSc" style="display:inline-block;width:90px;font-size: 8pt; font-family: Verdana;">5,390.86</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl35_lblPortValueSc" style="display:inline-block;width:96px;font-size: 8pt; font-family: Verdana;">27,657.05</span>
+                                                    
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl35_lblPortfolioPctgSc" style="display:inline-block;width:36px;font-size: 8pt; font-family: Verdana;">19.49</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl35_lblGrossPLSc" style="display:inline-block;width:72px;font-size: 8pt; font-family: Verdana;">901.86</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl35_lblGrossPLScPctg" style="display:inline-block;width:45px;font-size: 8pt; font-family: Verdana;">20.09</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl35_lblTotalCNESc" style="display:inline-block;width:49px;font-size: 8pt; font-family: Verdana;">-0.75</span>
+                                                </td>
+		</tr><tr style="color:#4A3C8C;background-color:#E7E7FF;">
+			<td>
+                                                    <span id="gvAcctBySecCode_ctl36_lblNo" style="display:inline-block;width:17px;font-size: 8pt; font-family: Verdana;">11</span>
+                                                </td><td>
+                                                    <span id="gvAcctBySecCode_ctl36_lblSubAcctNoSc" style="display:inline-block;width:78px;font-size: 8pt; font-family: Verdana;">2162517</span>
+                                                    
+                                                </td><td align="center">
+                                                    <span id="gvAcctBySecCode_ctl36_lblPModelCodeSc" style="display:inline-block;width:30px;font-size: 8pt; font-family: Verdana;">CBP_SRS</span>
+                                                </td><td align="center">
+                                                    <span id="gvAcctBySecCode_ctl36_lblCurrencySc" style="display:inline-block;width:15px;font-size: 8pt; font-family: Verdana;">SGD</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl36_lblQtySc" style="display:inline-block;width:75px;font-size: 8pt; font-family: Verdana;">102.1020</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl36_lblAvgCostSc" style="display:inline-block;width:70px;font-size: 8pt; font-family: Verdana;">35.0599</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl36_lblTotalCostSc" style="display:inline-block;width:86px;font-size: 8pt; font-family: Verdana;">3,579.69</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl36_lblMarketValueSc" style="display:inline-block;width:90px;font-size: 8pt; font-family: Verdana;">4,043.83</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl36_lblPortValueSc" style="display:inline-block;width:96px;font-size: 8pt; font-family: Verdana;">21,370.03</span>
+                                                    
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl36_lblPortfolioPctgSc" style="display:inline-block;width:36px;font-size: 8pt; font-family: Verdana;">18.92</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl36_lblGrossPLSc" style="display:inline-block;width:72px;font-size: 8pt; font-family: Verdana;">464.14</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl36_lblGrossPLScPctg" style="display:inline-block;width:45px;font-size: 8pt; font-family: Verdana;">12.97</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl36_lblTotalCNESc" style="display:inline-block;width:49px;font-size: 8pt; font-family: Verdana;">-0.21</span>
+                                                </td>
+		</tr><tr style="color:#4A3C8C;background-color:#F7F7F7;">
+			<td>
+                                                    <span id="gvAcctBySecCode_ctl37_lblNo" style="display:inline-block;width:17px;font-size: 8pt; font-family: Verdana;">12</span>
+                                                </td><td>
+                                                    <span id="gvAcctBySecCode_ctl37_lblSubAcctNoSc" style="display:inline-block;width:78px;font-size: 8pt; font-family: Verdana;">2162753</span>
+                                                    
+                                                </td><td align="center">
+                                                    <span id="gvAcctBySecCode_ctl37_lblPModelCodeSc" style="display:inline-block;width:30px;font-size: 8pt; font-family: Verdana;">CBP_SRS</span>
+                                                </td><td align="center">
+                                                    <span id="gvAcctBySecCode_ctl37_lblCurrencySc" style="display:inline-block;width:15px;font-size: 8pt; font-family: Verdana;">SGD</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl37_lblQtySc" style="display:inline-block;width:75px;font-size: 8pt; font-family: Verdana;">60.3480</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl37_lblAvgCostSc" style="display:inline-block;width:70px;font-size: 8pt; font-family: Verdana;">34.7203</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl37_lblTotalCostSc" style="display:inline-block;width:86px;font-size: 8pt; font-family: Verdana;">2,095.30</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl37_lblMarketValueSc" style="display:inline-block;width:90px;font-size: 8pt; font-family: Verdana;">2,390.13</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl37_lblPortValueSc" style="display:inline-block;width:96px;font-size: 8pt; font-family: Verdana;">12,546.64</span>
+                                                    
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl37_lblPortfolioPctgSc" style="display:inline-block;width:36px;font-size: 8pt; font-family: Verdana;">19.05</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl37_lblGrossPLSc" style="display:inline-block;width:72px;font-size: 8pt; font-family: Verdana;">294.83</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl37_lblGrossPLScPctg" style="display:inline-block;width:45px;font-size: 8pt; font-family: Verdana;">14.07</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl37_lblTotalCNESc" style="display:inline-block;width:49px;font-size: 8pt; font-family: Verdana;">-0.74</span>
+                                                </td>
+		</tr><tr style="color:#4A3C8C;background-color:#E7E7FF;">
+			<td>
+                                                    <span id="gvAcctBySecCode_ctl38_lblNo" style="display:inline-block;width:17px;font-size: 8pt; font-family: Verdana;">13</span>
+                                                </td><td>
+                                                    <span id="gvAcctBySecCode_ctl38_lblSubAcctNoSc" style="display:inline-block;width:78px;font-size: 8pt; font-family: Verdana;">2162754</span>
+                                                    
+                                                </td><td align="center">
+                                                    <span id="gvAcctBySecCode_ctl38_lblPModelCodeSc" style="display:inline-block;width:30px;font-size: 8pt; font-family: Verdana;">CBP_SRS</span>
+                                                </td><td align="center">
+                                                    <span id="gvAcctBySecCode_ctl38_lblCurrencySc" style="display:inline-block;width:15px;font-size: 8pt; font-family: Verdana;">SGD</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl38_lblQtySc" style="display:inline-block;width:75px;font-size: 8pt; font-family: Verdana;">60.3490</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl38_lblAvgCostSc" style="display:inline-block;width:70px;font-size: 8pt; font-family: Verdana;">34.7197</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl38_lblTotalCostSc" style="display:inline-block;width:86px;font-size: 8pt; font-family: Verdana;">2,095.30</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl38_lblMarketValueSc" style="display:inline-block;width:90px;font-size: 8pt; font-family: Verdana;">2,390.17</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl38_lblPortValueSc" style="display:inline-block;width:96px;font-size: 8pt; font-family: Verdana;">12,546.63</span>
+                                                    
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl38_lblPortfolioPctgSc" style="display:inline-block;width:36px;font-size: 8pt; font-family: Verdana;">19.05</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl38_lblGrossPLSc" style="display:inline-block;width:72px;font-size: 8pt; font-family: Verdana;">294.87</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl38_lblGrossPLScPctg" style="display:inline-block;width:45px;font-size: 8pt; font-family: Verdana;">14.07</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl38_lblTotalCNESc" style="display:inline-block;width:49px;font-size: 8pt; font-family: Verdana;">-0.74</span>
+                                                </td>
+		</tr><tr style="color:#4A3C8C;background-color:#F7F7F7;">
+			<td>
+                                                    <span id="gvAcctBySecCode_ctl39_lblNo" style="display:inline-block;width:17px;font-size: 8pt; font-family: Verdana;">14</span>
+                                                </td><td>
+                                                    <span id="gvAcctBySecCode_ctl39_lblSubAcctNoSc" style="display:inline-block;width:78px;font-size: 8pt; font-family: Verdana;">2162772</span>
+                                                    
+                                                </td><td align="center">
+                                                    <span id="gvAcctBySecCode_ctl39_lblPModelCodeSc" style="display:inline-block;width:30px;font-size: 8pt; font-family: Verdana;">CBP_SRS</span>
+                                                </td><td align="center">
+                                                    <span id="gvAcctBySecCode_ctl39_lblCurrencySc" style="display:inline-block;width:15px;font-size: 8pt; font-family: Verdana;">SGD</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl39_lblQtySc" style="display:inline-block;width:75px;font-size: 8pt; font-family: Verdana;">179.2170</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl39_lblAvgCostSc" style="display:inline-block;width:70px;font-size: 8pt; font-family: Verdana;">35.0601</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl39_lblTotalCostSc" style="display:inline-block;width:86px;font-size: 8pt; font-family: Verdana;">6,283.37</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl39_lblMarketValueSc" style="display:inline-block;width:90px;font-size: 8pt; font-family: Verdana;">7,098.03</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl39_lblPortValueSc" style="display:inline-block;width:96px;font-size: 8pt; font-family: Verdana;">37,157.95</span>
+                                                    
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl39_lblPortfolioPctgSc" style="display:inline-block;width:36px;font-size: 8pt; font-family: Verdana;">19.10</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl39_lblGrossPLSc" style="display:inline-block;width:72px;font-size: 8pt; font-family: Verdana;">814.66</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl39_lblGrossPLScPctg" style="display:inline-block;width:45px;font-size: 8pt; font-family: Verdana;">12.97</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl39_lblTotalCNESc" style="display:inline-block;width:49px;font-size: 8pt; font-family: Verdana;">-0.75</span>
+                                                </td>
+		</tr><tr style="color:#4A3C8C;background-color:#E7E7FF;">
+			<td>
+                                                    <span id="gvAcctBySecCode_ctl40_lblNo" style="display:inline-block;width:17px;font-size: 8pt; font-family: Verdana;">15</span>
+                                                </td><td>
+                                                    <span id="gvAcctBySecCode_ctl40_lblSubAcctNoSc" style="display:inline-block;width:78px;font-size: 8pt; font-family: Verdana;">2163085</span>
+                                                    
+                                                </td><td align="center">
+                                                    <span id="gvAcctBySecCode_ctl40_lblPModelCodeSc" style="display:inline-block;width:30px;font-size: 8pt; font-family: Verdana;">CBP_SRS</span>
+                                                </td><td align="center">
+                                                    <span id="gvAcctBySecCode_ctl40_lblCurrencySc" style="display:inline-block;width:15px;font-size: 8pt; font-family: Verdana;">SGD</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl40_lblQtySc" style="display:inline-block;width:75px;font-size: 8pt; font-family: Verdana;">59.0890</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl40_lblAvgCostSc" style="display:inline-block;width:70px;font-size: 8pt; font-family: Verdana;">35.4601</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl40_lblTotalCostSc" style="display:inline-block;width:86px;font-size: 8pt; font-family: Verdana;">2,095.30</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl40_lblMarketValueSc" style="display:inline-block;width:90px;font-size: 8pt; font-family: Verdana;">2,340.27</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl40_lblPortValueSc" style="display:inline-block;width:96px;font-size: 8pt; font-family: Verdana;">12,164.23</span>
+                                                    
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl40_lblPortfolioPctgSc" style="display:inline-block;width:36px;font-size: 8pt; font-family: Verdana;">19.24</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl40_lblGrossPLSc" style="display:inline-block;width:72px;font-size: 8pt; font-family: Verdana;">244.97</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl40_lblGrossPLScPctg" style="display:inline-block;width:45px;font-size: 8pt; font-family: Verdana;">11.69</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl40_lblTotalCNESc" style="display:inline-block;width:49px;font-size: 8pt; font-family: Verdana;">-0.74</span>
+                                                </td>
+		</tr><tr style="color:#4A3C8C;background-color:#F7F7F7;">
+			<td>
+                                                    <span id="gvAcctBySecCode_ctl41_lblNo" style="display:inline-block;width:17px;font-size: 8pt; font-family: Verdana;">16</span>
+                                                </td><td>
+                                                    <span id="gvAcctBySecCode_ctl41_lblSubAcctNoSc" style="display:inline-block;width:78px;font-size: 8pt; font-family: Verdana;">2163505</span>
+                                                    
+                                                </td><td align="center">
+                                                    <span id="gvAcctBySecCode_ctl41_lblPModelCodeSc" style="display:inline-block;width:30px;font-size: 8pt; font-family: Verdana;">CBP_SRS</span>
+                                                </td><td align="center">
+                                                    <span id="gvAcctBySecCode_ctl41_lblCurrencySc" style="display:inline-block;width:15px;font-size: 8pt; font-family: Verdana;">SGD</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl41_lblQtySc" style="display:inline-block;width:75px;font-size: 8pt; font-family: Verdana;">162.0690</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl41_lblAvgCostSc" style="display:inline-block;width:70px;font-size: 8pt; font-family: Verdana;">37.0455</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl41_lblTotalCostSc" style="display:inline-block;width:86px;font-size: 8pt; font-family: Verdana;">6,003.92</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl41_lblMarketValueSc" style="display:inline-block;width:90px;font-size: 8pt; font-family: Verdana;">6,418.87</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl41_lblPortValueSc" style="display:inline-block;width:96px;font-size: 8pt; font-family: Verdana;">32,760.63</span>
+                                                    
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl41_lblPortfolioPctgSc" style="display:inline-block;width:36px;font-size: 8pt; font-family: Verdana;">19.59</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl41_lblGrossPLSc" style="display:inline-block;width:72px;font-size: 8pt; font-family: Verdana;">414.95</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl41_lblGrossPLScPctg" style="display:inline-block;width:45px;font-size: 8pt; font-family: Verdana;">6.91</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl41_lblTotalCNESc" style="display:inline-block;width:49px;font-size: 8pt; font-family: Verdana;">-0.17</span>
+                                                </td>
+		</tr><tr style="color:#4A3C8C;background-color:#E7E7FF;">
+			<td>
+                                                    <span id="gvAcctBySecCode_ctl42_lblNo" style="display:inline-block;width:17px;font-size: 8pt; font-family: Verdana;">17</span>
+                                                </td><td>
+                                                    <span id="gvAcctBySecCode_ctl42_lblSubAcctNoSc" style="display:inline-block;width:78px;font-size: 8pt; font-family: Verdana;">2163604</span>
+                                                    
+                                                </td><td align="center">
+                                                    <span id="gvAcctBySecCode_ctl42_lblPModelCodeSc" style="display:inline-block;width:30px;font-size: 8pt; font-family: Verdana;">CBP_SRS</span>
+                                                </td><td align="center">
+                                                    <span id="gvAcctBySecCode_ctl42_lblCurrencySc" style="display:inline-block;width:15px;font-size: 8pt; font-family: Verdana;">SGD</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl42_lblQtySc" style="display:inline-block;width:75px;font-size: 8pt; font-family: Verdana;">15.6940</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl42_lblAvgCostSc" style="display:inline-block;width:70px;font-size: 8pt; font-family: Verdana;">37.3238</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl42_lblTotalCostSc" style="display:inline-block;width:86px;font-size: 8pt; font-family: Verdana;">585.76</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl42_lblMarketValueSc" style="display:inline-block;width:90px;font-size: 8pt; font-family: Verdana;">621.57</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl42_lblPortValueSc" style="display:inline-block;width:96px;font-size: 8pt; font-family: Verdana;">3,108.50</span>
+                                                    
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl42_lblPortfolioPctgSc" style="display:inline-block;width:36px;font-size: 8pt; font-family: Verdana;">20.00</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl42_lblGrossPLSc" style="display:inline-block;width:72px;font-size: 8pt; font-family: Verdana;">35.81</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl42_lblGrossPLScPctg" style="display:inline-block;width:45px;font-size: 8pt; font-family: Verdana;">6.11</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl42_lblTotalCNESc" style="display:inline-block;width:49px;font-size: 8pt; font-family: Verdana;">0.00</span>
+                                                </td>
+		</tr><tr style="color:#4A3C8C;background-color:#F7F7F7;">
+			<td>
+                                                    <span id="gvAcctBySecCode_ctl43_lblNo" style="display:inline-block;width:17px;font-size: 8pt; font-family: Verdana;">18</span>
+                                                </td><td>
+                                                    <span id="gvAcctBySecCode_ctl43_lblSubAcctNoSc" style="display:inline-block;width:78px;font-size: 8pt; font-family: Verdana;">2163948</span>
+                                                    
+                                                </td><td align="center">
+                                                    <span id="gvAcctBySecCode_ctl43_lblPModelCodeSc" style="display:inline-block;width:30px;font-size: 8pt; font-family: Verdana;">CBP_SRS</span>
+                                                </td><td align="center">
+                                                    <span id="gvAcctBySecCode_ctl43_lblCurrencySc" style="display:inline-block;width:15px;font-size: 8pt; font-family: Verdana;">SGD</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl43_lblQtySc" style="display:inline-block;width:75px;font-size: 8pt; font-family: Verdana;">34.3770</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl43_lblAvgCostSc" style="display:inline-block;width:70px;font-size: 8pt; font-family: Verdana;">37.3287</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl43_lblTotalCostSc" style="display:inline-block;width:86px;font-size: 8pt; font-family: Verdana;">1,283.25</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl43_lblMarketValueSc" style="display:inline-block;width:90px;font-size: 8pt; font-family: Verdana;">1,361.53</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl43_lblPortValueSc" style="display:inline-block;width:96px;font-size: 8pt; font-family: Verdana;">6,808.97</span>
+                                                    
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl43_lblPortfolioPctgSc" style="display:inline-block;width:36px;font-size: 8pt; font-family: Verdana;">20.00</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl43_lblGrossPLSc" style="display:inline-block;width:72px;font-size: 8pt; font-family: Verdana;">78.28</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl43_lblGrossPLScPctg" style="display:inline-block;width:45px;font-size: 8pt; font-family: Verdana;">6.10</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl43_lblTotalCNESc" style="display:inline-block;width:49px;font-size: 8pt; font-family: Verdana;">0.00</span>
+                                                </td>
+		</tr><tr style="color:#4A3C8C;background-color:#E7E7FF;">
+			<td>
+                                                    <span id="gvAcctBySecCode_ctl44_lblNo" style="display:inline-block;width:17px;font-size: 8pt; font-family: Verdana;">19</span>
+                                                </td><td>
+                                                    <span id="gvAcctBySecCode_ctl44_lblSubAcctNoSc" style="display:inline-block;width:78px;font-size: 8pt; font-family: Verdana;">2163958</span>
+                                                    
+                                                </td><td align="center">
+                                                    <span id="gvAcctBySecCode_ctl44_lblPModelCodeSc" style="display:inline-block;width:30px;font-size: 8pt; font-family: Verdana;">CBP_SRS</span>
+                                                </td><td align="center">
+                                                    <span id="gvAcctBySecCode_ctl44_lblCurrencySc" style="display:inline-block;width:15px;font-size: 8pt; font-family: Verdana;">SGD</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl44_lblQtySc" style="display:inline-block;width:75px;font-size: 8pt; font-family: Verdana;">34.3770</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl44_lblAvgCostSc" style="display:inline-block;width:70px;font-size: 8pt; font-family: Verdana;">37.3287</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl44_lblTotalCostSc" style="display:inline-block;width:86px;font-size: 8pt; font-family: Verdana;">1,283.25</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl44_lblMarketValueSc" style="display:inline-block;width:90px;font-size: 8pt; font-family: Verdana;">1,361.53</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl44_lblPortValueSc" style="display:inline-block;width:96px;font-size: 8pt; font-family: Verdana;">6,808.97</span>
+                                                    
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl44_lblPortfolioPctgSc" style="display:inline-block;width:36px;font-size: 8pt; font-family: Verdana;">20.00</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl44_lblGrossPLSc" style="display:inline-block;width:72px;font-size: 8pt; font-family: Verdana;">78.28</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl44_lblGrossPLScPctg" style="display:inline-block;width:45px;font-size: 8pt; font-family: Verdana;">6.10</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl44_lblTotalCNESc" style="display:inline-block;width:49px;font-size: 8pt; font-family: Verdana;">0.00</span>
+                                                </td>
+		</tr><tr style="color:#4A3C8C;background-color:#F7F7F7;">
+			<td>
+                                                    <span id="gvAcctBySecCode_ctl45_lblNo" style="display:inline-block;width:17px;font-size: 8pt; font-family: Verdana;">20</span>
+                                                </td><td>
+                                                    <span id="gvAcctBySecCode_ctl45_lblSubAcctNoSc" style="display:inline-block;width:78px;font-size: 8pt; font-family: Verdana;">2163992</span>
+                                                    
+                                                </td><td align="center">
+                                                    <span id="gvAcctBySecCode_ctl45_lblPModelCodeSc" style="display:inline-block;width:30px;font-size: 8pt; font-family: Verdana;">CBP_SRS</span>
+                                                </td><td align="center">
+                                                    <span id="gvAcctBySecCode_ctl45_lblCurrencySc" style="display:inline-block;width:15px;font-size: 8pt; font-family: Verdana;">SGD</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl45_lblQtySc" style="display:inline-block;width:75px;font-size: 8pt; font-family: Verdana;">29.4060</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl45_lblAvgCostSc" style="display:inline-block;width:70px;font-size: 8pt; font-family: Verdana;">37.3471</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl45_lblTotalCostSc" style="display:inline-block;width:86px;font-size: 8pt; font-family: Verdana;">1,098.23</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl45_lblMarketValueSc" style="display:inline-block;width:90px;font-size: 8pt; font-family: Verdana;">1,164.65</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl45_lblPortValueSc" style="display:inline-block;width:96px;font-size: 8pt; font-family: Verdana;">5,816.05</span>
+                                                    
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl45_lblPortfolioPctgSc" style="display:inline-block;width:36px;font-size: 8pt; font-family: Verdana;">20.02</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl45_lblGrossPLSc" style="display:inline-block;width:72px;font-size: 8pt; font-family: Verdana;">66.42</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl45_lblGrossPLScPctg" style="display:inline-block;width:45px;font-size: 8pt; font-family: Verdana;">6.05</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl45_lblTotalCNESc" style="display:inline-block;width:49px;font-size: 8pt; font-family: Verdana;">0.00</span>
+                                                </td>
+		</tr><tr style="color:#4A3C8C;background-color:#E7E7FF;">
+			<td>
+                                                    <span id="gvAcctBySecCode_ctl46_lblNo" style="display:inline-block;width:17px;font-size: 8pt; font-family: Verdana;">21</span>
+                                                </td><td>
+                                                    <span id="gvAcctBySecCode_ctl46_lblSubAcctNoSc" style="display:inline-block;width:78px;font-size: 8pt; font-family: Verdana;">2164134</span>
+                                                    
+                                                </td><td align="center">
+                                                    <span id="gvAcctBySecCode_ctl46_lblPModelCodeSc" style="display:inline-block;width:30px;font-size: 8pt; font-family: Verdana;">CBP_SRS</span>
+                                                </td><td align="center">
+                                                    <span id="gvAcctBySecCode_ctl46_lblCurrencySc" style="display:inline-block;width:15px;font-size: 8pt; font-family: Verdana;">SGD</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl46_lblQtySc" style="display:inline-block;width:75px;font-size: 8pt; font-family: Verdana;">137.5200</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl46_lblAvgCostSc" style="display:inline-block;width:70px;font-size: 8pt; font-family: Verdana;">35.8503</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl46_lblTotalCostSc" style="display:inline-block;width:86px;font-size: 8pt; font-family: Verdana;">4,930.13</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl46_lblMarketValueSc" style="display:inline-block;width:90px;font-size: 8pt; font-family: Verdana;">5,446.59</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl46_lblPortValueSc" style="display:inline-block;width:96px;font-size: 8pt; font-family: Verdana;">27,410.45</span>
+                                                    
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl46_lblPortfolioPctgSc" style="display:inline-block;width:36px;font-size: 8pt; font-family: Verdana;">19.87</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl46_lblGrossPLSc" style="display:inline-block;width:72px;font-size: 8pt; font-family: Verdana;">516.46</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl46_lblGrossPLScPctg" style="display:inline-block;width:45px;font-size: 8pt; font-family: Verdana;">10.48</span>
+                                                </td><td align="right">
+                                                    <span id="gvAcctBySecCode_ctl46_lblTotalCNESc" style="display:inline-block;width:49px;font-size: 8pt; font-family: Verdana;">-0.28</span>
+                                                </td>
+		</tr><tr align="right" style="color:#4A3C8C;background-color:#B5C7DE;font-weight:bold;">
+			<td>&nbsp;</td><td>
+                                                    Total :
+                                                </td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>129,815.25</td><td>152,047.02</td><td>802,617.00</td><td>19.24</td><td>22,231.77</td><td>17.13</td><td>&nbsp;</td>
+		</tr>
+	</table>
+</div></form>

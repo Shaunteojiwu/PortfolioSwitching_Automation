@@ -1,0 +1,5 @@
+selenium==4.21.0
+openpyxl==3.1.5
+pywin32==312
+webdriver-manager==4.0.1
+pandas
