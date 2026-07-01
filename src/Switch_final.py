@@ -31,42 +31,56 @@ SUGGEST_FILL        = PatternFill("solid", fgColor="FFF9C4")
 THIN                = Side(style='thin', color="D9D9D9")
 BORDER              = Border(left=THIN, right=THIN, top=THIN, bottom=THIN)
 
+
+
+
+# ─────────────────────────────────────────────
+# HELPER FUNCTION
+# ─────────────────────────────────────────────
+
+def create_root():
+    root = tk.Tk()
+    root.withdraw()
+    root.lift()
+    root.attributes("-topmost", True)
+    return root
+
 # ─────────────────────────────────────────────
 # UI HELPERS
 # ─────────────────────────────────────────────
 def show_msg(title, message):
-    root = tk.Tk(); root.withdraw(); root.lift(); root.attributes('-topmost', True)
-    messagebox.showinfo(title, message, parent=root); root.destroy()
+    root =create_root() #creates temp tinker window, hides it, force popup to appear infront of other windows
+    messagebox.showinfo(title, message, parent=root); root.destroy() #shows an information message, close the temporary window
 
 def prompt_file(title, filetypes=None):
-    root = tk.Tk(); root.withdraw(); root.lift(); root.attributes('-topmost', True)
-    path = filedialog.askopenfilename(title=title, filetypes=filetypes or [])
-    root.destroy(); return path
+    root =create_root()
+    path = filedialog.askopenfilename(title=title, filetypes=filetypes or []) #user selects excel file
+    root.destroy(); return path #close the temporary window and return file path
 
 def prompt_folder(title):
-    root = tk.Tk(); root.withdraw(); root.lift(); root.attributes('-topmost', True)
-    path = filedialog.askdirectory(title=title); root.destroy(); return path
+    root =create_root()
+    path = filedialog.askdirectory(title=title); root.destroy(); return path #opens a folder, close window and return path
 
 def ask_yes_no(title, message):
-    root = tk.Tk(); root.withdraw(); root.lift(); root.attributes('-topmost', True)
-    result = messagebox.askyesno(title, message, parent=root); root.destroy()
+    root =create_root()
+    result = messagebox.askyesno(title, message, parent=root); root.destroy() # show a window where yes==True, no=False, close windowand retunr result
     return result
 
 # ─────────────────────────────────────────────
 # FILE LOADING
 # ─────────────────────────────────────────────
 def convert_html_xls_to_xlsx(input_path):
-    with open(input_path, 'rb') as f:
-        content = f.read()
-    soup = BeautifulSoup(content, 'html.parser')
-    tables = pd.read_html(io.StringIO(str(soup)), header=None)
+    with open(input_path, 'rb') as f: #open file and read as binary
+        content = f.read() #reads all the html content
+    soup = BeautifulSoup(content, 'html.parser') #reads the html and creates a tree (HTML Text -> Beautiful Soup object),can find tables, rows, cells, etc.
+    tables = pd.read_html(io.StringIO(str(soup)), header=None) #turns object back into html,create a fake memory in file, pandas then read the html and search for <table> and converts it to df, [df1,df2,df3]
     if not tables:
-        raise ValueError("No HTML tables found.")
-    raw_df = tables[0]
-    raw_df.columns = raw_df.iloc[0].astype(str).str.strip()
-    df = raw_df.iloc[1:].reset_index(drop=True)
-    output_path = os.path.splitext(input_path)[0] + ".xlsx"
-    df.to_excel(output_path, index=False)
+        raise ValueError("No HTML tables found.") #if no tables found
+    raw_df = tables[0] # read first table
+    raw_df.columns = raw_df.iloc[0].astype(str).str.strip() #rename column as first row, this cause repeated column names (coumn index and row index 0)
+    df = raw_df.iloc[1:].reset_index(drop=True) # take from 1st row onwards, to remove row 0 that contain header, reset the index to start from index 0 and drop the index column
+    output_path = os.path.splitext(input_path)[0] + ".xlsx" # split the input file into 2 parts (remove xls) and add xlsx to the 2nd part
+    df.to_excel(output_path, index=False) # convert df to excel and output to the output path
     return output_path
 
 def load_excel_safe(path):
@@ -92,7 +106,7 @@ def clean_df(df):
 # ─────────────────────────────────────────────
 # ALLOCATION HELPERS
 # ─────────────────────────────────────────────
-def load_allocation(xls, sheet):
+def load_allocation(xls, sheet): #xls is excel file object, old and new excel file in our case created in main
     """
     Load allocation sheet. Handles:
     - 'weights' or 'weights (%)' column name
@@ -112,15 +126,15 @@ def load_allocation(xls, sheet):
     if 'weights' not in df.columns:
         return None
     df['mgr_code'] = df['mgr_code'].apply(
-        lambda x: str(int(float(x))).zfill(3)
-        if pd.notna(x) and str(x).strip() not in ('', 'nan') else '')
+        lambda x: str(int(float(x))).zfill(3) #take the mgr code and always make it 3 values, eg, "001","012","123"
+        if pd.notna(x) and str(x).strip() not in ('', 'nan') else '') # if not empty run that fnc otherwise return ""
     df['fund_code'] = df['fund_code'].apply(
         lambda x: str(int(float(x))).zfill(3)
         if pd.notna(x) and str(x).strip() not in ('', 'nan') else '')
-    df['weights'] = pd.to_numeric(df['weights'], errors='coerce').fillna(0)
+    df['weights'] = pd.to_numeric(df['weights'], errors='coerce').fillna(0) # change all weights to numeric, fill up na with 0
     # Normalise % integers to decimals
-    if df['weights'].max() > 1:
-        df['weights'] = df['weights'] / 100
+    if df['weights'].max() > 1: # this weight percentage, must be in decimal
+        df['weights'] = df['weights'] / 100 
     df['key'] = df['mgr_code'] + df['fund_code']
     return df
 
@@ -134,32 +148,32 @@ def prepare_smart_tab(xls, sheet):
     weight_col = 'weights (%)' if 'weights (%)' in df.columns else 'weights'
     if weight_col in df.columns:
         df[weight_col] = pd.to_numeric(df[weight_col], errors='coerce')
-        if df[weight_col].dropna().le(1).all():
-            df[weight_col] = (df[weight_col] * 100).round(2)
+        if df[weight_col].dropna().le(1).all(): #drop missing values, if weight less than equal to 1, check if all is True (less/equal to 1)
+            df[weight_col] = (df[weight_col] * 100).round(2) # make it a percentage
         if weight_col == 'weights':
-            df.rename(columns={'weights': 'weights (%)'}, inplace=True)
+            df.rename(columns={'weights': 'weights (%)'}, inplace=True) # reanme it to percentage, for output (human readability)
     return df
 
 # ─────────────────────────────────────────────
 # FUND NAME MAP
 # ─────────────────────────────────────────────
-def build_fund_name_map(xls_list):
+def build_fund_name_map(xls_list): #old and new excel file
     fmap = {}
     for xls in xls_list:
-        for sheet in xls.sheet_names:
+        for sheet in xls.sheet_names: #read through all the sheet within
             try:
                 df = pd.read_excel(xls, sheet_name=sheet).rename(
-                    columns=lambda x: str(x).strip().lower())
+                    columns=lambda x: str(x).strip().lower()) #read the file anf sheet, and lowercase,strip the column heaers
                 if 'mgr_code' not in df.columns or 'fund_code' not in df.columns:
                     continue
-                for _, r in df.iterrows():
+                for _, r in df.iterrows(): #iterrows, rows index and the row
                     try:
                         mgr  = str(int(float(r['mgr_code']))).zfill(3)
                         fund = str(int(float(r['fund_code']))).zfill(3)
                         name = str(r.get('fund name', '')) \
                                if pd.notna(r.get('fund name', '')) else ''
                         if name:
-                            fmap[(mgr, fund)] = name
+                            fmap[(mgr, fund)] = name # {("001", "005"): "PIMCO Income Fund"}
                     except (ValueError, TypeError):
                         continue
             except Exception:
@@ -185,7 +199,7 @@ def compute_deltas(new_xls, old_xls, port_type):
     old_cols = old_alloc[['key', 'mgr_code', 'fund_code', 'weights']].rename(
         columns={'weights': 'old_w', 'mgr_code': 'mgr_old', 'fund_code': 'fund_old'})
 
-    merged = pd.merge(new_cols, old_cols, on='key', how='outer')
+    merged = pd.merge(new_cols, old_cols, on='key', how='outer') #match by key and keep everything
     merged['new_w']     = pd.to_numeric(merged['new_w'], errors='coerce').fillna(0)
     merged['old_w']     = pd.to_numeric(merged['old_w'], errors='coerce').fillna(0)
     merged['mgr_code']  = merged['mgr_new'].fillna(merged['mgr_old'])
@@ -195,155 +209,155 @@ def compute_deltas(new_xls, old_xls, port_type):
     # Attach fund names from both files
     name_map = build_fund_name_map([new_xls, old_xls])
     merged['fund_name'] = merged.apply(
-        lambda r: name_map.get((r['mgr_code'], r['fund_code']), ''), axis=1)
+        lambda r: name_map.get((r['mgr_code'], r['fund_code']), ''), axis=1) #attach fund names  "PIMCO Income Fund"
 
-    return merged[merged['delta'] != 0].copy()
+    return merged[merged['delta'] != 0].copy() # return all thsose have changes
+
+# # ─────────────────────────────────────────────
+# # AUTO-PAIRING LOGIC
+# # ─────────────────────────────────────────────
+# def auto_pair(deltas_df):
+#     """
+#     Greedy delta matching:
+#     - Sort switch-out funds by abs(delta) descending
+#     - Sort switch-in funds by delta descending
+#     - Match each switch-out fund to switch-in fund(s) whose deltas sum closest
+#     - If one switch-out delta matches multiple switch-in deltas, split across them
+#     Returns list of dicts: {MgrCd_OUT, FundCd_OUT, FundName_OUT,
+#                             MgrCd_IN, FundCd_IN, FundName_IN, delta_out, delta_in}
+#     """
+#     out_funds = deltas_df[deltas_df['delta'] < 0].copy()
+#     in_funds  = deltas_df[deltas_df['delta'] > 0].copy()
+
+#     out_funds = out_funds.sort_values('delta').reset_index(drop=True)   # most negative first
+#     in_funds  = in_funds.sort_values('delta', ascending=False).reset_index(drop=True)
+
+#     # remaining capacity for each switch-in fund
+#     in_remaining = in_funds['delta'].tolist()
+#     in_list      = in_funds.to_dict('records')
+
+#     pairs = []
+#     for _, out_row in out_funds.iterrows():
+#         needed = abs(out_row['delta'])
+#         j = 0
+#         while needed > 1e-8 and j < len(in_list):
+#             available = in_remaining[j]
+#             if available <= 1e-8:
+#                 j += 1
+#                 continue
+#             take = min(needed, available)
+#             pairs.append({
+#                 'MgrCd_OUT':   out_row['mgr_code'],
+#                 'FundCd_OUT':  out_row['fund_code'],
+#                 'FundName_OUT': out_row['fund_name'],
+#                 'MgrCd_IN':    in_list[j]['mgr_code'],
+#                 'FundCd_IN':   in_list[j]['fund_code'],
+#                 'FundName_IN': in_list[j]['fund_name'],
+#                 'delta_out':   round(out_row['delta'], 4),
+#                 'delta_in':    round(in_list[j]['delta'], 4),
+#                 'delta_matched': round(take, 4),
+#             })
+#             in_remaining[j] -= take
+#             needed           -= take
+#             j += 1
+
+#     return pairs
+
+# # ─────────────────────────────────────────────
+# # MAPPING FILE WRITER
+# # ─────────────────────────────────────────────
+# def write_mapping_suggestion(path, new_xls, old_xls, port_types):
+#     """
+#     Write a suggested mapping Excel file with one sheet per portfolio type.
+#     Rows are pre-filled by auto_pair(). User edits and saves before continuing.
+#     """
+#     with pd.ExcelWriter(path, engine='openpyxl') as writer:
+#         for pt in port_types:
+#             deltas = compute_deltas(new_xls, old_xls, pt)
+#             if deltas is None or deltas.empty:
+#                 continue
+
+#             pairs = auto_pair(deltas)
+#             if not pairs:
+#                 continue
+
+#             df = pd.DataFrame(pairs)[[
+#                 'MgrCd_OUT', 'FundCd_OUT', 'FundName_OUT',
+#                 'MgrCd_IN',  'FundCd_IN',  'FundName_IN',
+#                 'delta_out', 'delta_in', 'delta_matched'
+#             ]]
+#             df.insert(0, 'port_type', pt)
+#             df.to_excel(writer, sheet_name=pt, index=False)
+
+#     # Format with openpyxl
+#     wb = load_workbook(path)
+#     for sheet in wb.sheetnames:
+#         ws = wb[sheet]
+#         # Header row
+#         for cell in ws[1]:
+#             cell.fill      = HEADER_FILL_MAPPING
+#             cell.font      = HEADER_FONT
+#             cell.alignment = Alignment(horizontal='center', vertical='center',
+#                                        wrap_text=True)
+#             cell.border    = BORDER
+#         ws.row_dimensions[1].height = 30
+#         # Data rows + highlight suggestion in yellow
+#         for row_idx, row in enumerate(ws.iter_rows(min_row=2), start=2):
+#             fill = ALT_FILL_LIGHT if row_idx % 2 == 0 else ALT_FILL_NONE
+#             for cell in row:
+#                 cell.font   = BODY_FONT
+#                 cell.border = BORDER
+#                 cell.fill   = fill
+#         # Note in first row above header
+#         ws.insert_rows(1)
+#         note = ws.cell(row=1, column=1)
+#         note.value = (
+#             "AUTO-SUGGESTED MAPPING — Please verify each row. "
+#             "Add/remove/edit rows as needed. "
+#             "Save this file before clicking OK in the script."
+#         )
+#         note.font      = Font(bold=True, italic=True, name="Arial",
+#                               size=10, color="7B5B00")
+#         note.alignment = Alignment(horizontal='left')
+#         ws.merge_cells(start_row=1, start_column=1,
+#                        end_row=1, end_column=10)
+#         ws.freeze_panes = 'A3'
+#         # Column widths
+#         col_widths = {'A': 14, 'B': 12, 'C': 12, 'D': 45, 'E': 12,
+#                       'F': 12, 'G': 45, 'H': 12, 'I': 12, 'J': 14}
+#         for col, width in col_widths.items():
+#             ws.column_dimensions[col].width = width
+#     wb.save(path)
+#     print(f"  Mapping file saved: {path}")
 
 # ─────────────────────────────────────────────
-# AUTO-PAIRING LOGIC
-# ─────────────────────────────────────────────
-def auto_pair(deltas_df):
-    """
-    Greedy delta matching:
-    - Sort switch-out funds by abs(delta) descending
-    - Sort switch-in funds by delta descending
-    - Match each switch-out fund to switch-in fund(s) whose deltas sum closest
-    - If one switch-out delta matches multiple switch-in deltas, split across them
-    Returns list of dicts: {MgrCd_OUT, FundCd_OUT, FundName_OUT,
-                            MgrCd_IN, FundCd_IN, FundName_IN, delta_out, delta_in}
-    """
-    out_funds = deltas_df[deltas_df['delta'] < 0].copy()
-    in_funds  = deltas_df[deltas_df['delta'] > 0].copy()
-
-    out_funds = out_funds.sort_values('delta').reset_index(drop=True)   # most negative first
-    in_funds  = in_funds.sort_values('delta', ascending=False).reset_index(drop=True)
-
-    # remaining capacity for each switch-in fund
-    in_remaining = in_funds['delta'].tolist()
-    in_list      = in_funds.to_dict('records')
-
-    pairs = []
-    for _, out_row in out_funds.iterrows():
-        needed = abs(out_row['delta'])
-        j = 0
-        while needed > 1e-8 and j < len(in_list):
-            available = in_remaining[j]
-            if available <= 1e-8:
-                j += 1
-                continue
-            take = min(needed, available)
-            pairs.append({
-                'MgrCd_OUT':   out_row['mgr_code'],
-                'FundCd_OUT':  out_row['fund_code'],
-                'FundName_OUT': out_row['fund_name'],
-                'MgrCd_IN':    in_list[j]['mgr_code'],
-                'FundCd_IN':   in_list[j]['fund_code'],
-                'FundName_IN': in_list[j]['fund_name'],
-                'delta_out':   round(out_row['delta'], 4),
-                'delta_in':    round(in_list[j]['delta'], 4),
-                'delta_matched': round(take, 4),
-            })
-            in_remaining[j] -= take
-            needed           -= take
-            j += 1
-
-    return pairs
-
-# ─────────────────────────────────────────────
-# MAPPING FILE WRITER
-# ─────────────────────────────────────────────
-def write_mapping_suggestion(path, new_xls, old_xls, port_types):
-    """
-    Write a suggested mapping Excel file with one sheet per portfolio type.
-    Rows are pre-filled by auto_pair(). User edits and saves before continuing.
-    """
-    with pd.ExcelWriter(path, engine='openpyxl') as writer:
-        for pt in port_types:
-            deltas = compute_deltas(new_xls, old_xls, pt)
-            if deltas is None or deltas.empty:
-                continue
-
-            pairs = auto_pair(deltas)
-            if not pairs:
-                continue
-
-            df = pd.DataFrame(pairs)[[
-                'MgrCd_OUT', 'FundCd_OUT', 'FundName_OUT',
-                'MgrCd_IN',  'FundCd_IN',  'FundName_IN',
-                'delta_out', 'delta_in', 'delta_matched'
-            ]]
-            df.insert(0, 'port_type', pt)
-            df.to_excel(writer, sheet_name=pt, index=False)
-
-    # Format with openpyxl
-    wb = load_workbook(path)
-    for sheet in wb.sheetnames:
-        ws = wb[sheet]
-        # Header row
-        for cell in ws[1]:
-            cell.fill      = HEADER_FILL_MAPPING
-            cell.font      = HEADER_FONT
-            cell.alignment = Alignment(horizontal='center', vertical='center',
-                                       wrap_text=True)
-            cell.border    = BORDER
-        ws.row_dimensions[1].height = 30
-        # Data rows + highlight suggestion in yellow
-        for row_idx, row in enumerate(ws.iter_rows(min_row=2), start=2):
-            fill = ALT_FILL_LIGHT if row_idx % 2 == 0 else ALT_FILL_NONE
-            for cell in row:
-                cell.font   = BODY_FONT
-                cell.border = BORDER
-                cell.fill   = fill
-        # Note in first row above header
-        ws.insert_rows(1)
-        note = ws.cell(row=1, column=1)
-        note.value = (
-            "AUTO-SUGGESTED MAPPING — Please verify each row. "
-            "Add/remove/edit rows as needed. "
-            "Save this file before clicking OK in the script."
-        )
-        note.font      = Font(bold=True, italic=True, name="Arial",
-                              size=10, color="7B5B00")
-        note.alignment = Alignment(horizontal='left')
-        ws.merge_cells(start_row=1, start_column=1,
-                       end_row=1, end_column=10)
-        ws.freeze_panes = 'A3'
-        # Column widths
-        col_widths = {'A': 14, 'B': 12, 'C': 12, 'D': 45, 'E': 12,
-                      'F': 12, 'G': 45, 'H': 12, 'I': 12, 'J': 14}
-        for col, width in col_widths.items():
-            ws.column_dimensions[col].width = width
-    wb.save(path)
-    print(f"  Mapping file saved: {path}")
-
-# ─────────────────────────────────────────────
-# LOAD CONFIRMED MAPPING
-# ─────────────────────────────────────────────
-def load_mapping(path):
-    """
-    Read the confirmed mapping file (all sheets combined).
-    Returns DataFrame with columns:
-      port_type, MgrCd_OUT, FundCd_OUT, MgrCd_IN, FundCd_IN
-    """
-    xls  = pd.ExcelFile(path)
-    rows = []
-    for sheet in xls.sheet_names:
-        df = pd.read_excel(xls, sheet_name=sheet)
-        df.columns = [str(c).strip() for c in df.columns]
-        # Skip note rows (non-data rows where port_type is blank or is the note text)
-        if 'port_type' not in df.columns:
-            continue
-        df = df[df['port_type'].notna()].copy()
-        df = df[~df['port_type'].astype(str).str.startswith('AUTO')]
-        # Zero-pad fund codes
-        for col in ['MgrCd_OUT', 'FundCd_OUT', 'MgrCd_IN', 'FundCd_IN']:
-            if col in df.columns:
-                df[col] = df[col].apply(
-                    lambda x: str(int(float(x))).zfill(3)
-                    if pd.notna(x) and str(x).strip() not in ('', 'nan') else '')
-        rows.append(df[['port_type', 'MgrCd_OUT', 'FundCd_OUT',
-                         'MgrCd_IN', 'FundCd_IN']])
-    return pd.concat(rows, ignore_index=True) if rows else pd.DataFrame()
+# # LOAD CONFIRMED MAPPING
+# # ─────────────────────────────────────────────
+# def load_mapping(path):
+#     """
+#     Read the confirmed mapping file (all sheets combined).
+#     Returns DataFrame with columns:
+#       port_type, MgrCd_OUT, FundCd_OUT, MgrCd_IN, FundCd_IN
+#     """
+#     xls  = pd.ExcelFile(path)
+#     rows = []
+#     for sheet in xls.sheet_names:
+#         df = pd.read_excel(xls, sheet_name=sheet)
+#         df.columns = [str(c).strip() for c in df.columns]
+#         # Skip note rows (non-data rows where port_type is blank or is the note text)
+#         if 'port_type' not in df.columns:
+#             continue
+#         df = df[df['port_type'].notna()].copy()
+#         df = df[~df['port_type'].astype(str).str.startswith('AUTO')]
+#         # Zero-pad fund codes
+#         for col in ['MgrCd_OUT', 'FundCd_OUT', 'MgrCd_IN', 'FundCd_IN']:
+#             if col in df.columns:
+#                 df[col] = df[col].apply(
+#                     lambda x: str(int(float(x))).zfill(3)
+#                     if pd.notna(x) and str(x).strip() not in ('', 'nan') else '')
+#         rows.append(df[['port_type', 'MgrCd_OUT', 'FundCd_OUT',
+#                          'MgrCd_IN', 'FundCd_IN']])
+#     return pd.concat(rows, ignore_index=True) if rows else pd.DataFrame()
 
 # ─────────────────────────────────────────────
 # CORE TRADE CALCULATION
@@ -355,16 +369,16 @@ def compute_switch_trades(rebal_df, new_xls, old_xls, fund_name_map):
       units_to_fund_B = units_out x (delta_B / total_positive_delta)
     Last destination gets remainder to eliminate rounding residuals.
     """
-    rebal_df = rebal_df.copy()
+    rebal_df = rebal_df.copy() #rebalance sheet copy
     rebal_df.columns = [c.strip() for c in rebal_df.columns]
     rebal_df['svc_acct']  = rebal_df['svc_acct'].astype(str).str.strip().str.zfill(7)
     rebal_df['port_type'] = rebal_df['port_type'].astype(str).str.strip().str.replace(
-        r'^T_', '', regex=True)
+        r'^T_', '', regex=True) #^ start of string T_ replace it with empty string
     rebal_df['code'] = rebal_df['code'].apply(
         lambda x: str(int(float(x))).zfill(6)
         if pd.notna(x) and str(x).strip() not in ('', 'nan') else '')
-    rebal_df['MgrCd']    = rebal_df['code'].str[:3]
-    rebal_df['FundCd']   = rebal_df['code'].str[-3:]
+    rebal_df['MgrCd']    = rebal_df['code'].str[:3] # take the first 3 elements of string
+    rebal_df['FundCd']   = rebal_df['code'].str[-3:] # take last 3 elements of string
     rebal_df['qty']      = pd.to_numeric(rebal_df['qty'],      errors='coerce').fillna(0)
     rebal_df['mkt_val']  = pd.to_numeric(rebal_df['mkt_val'],  errors='coerce').fillna(0)
     rebal_df['total_pf'] = pd.to_numeric(rebal_df['total_pf'], errors='coerce').fillna(0)
