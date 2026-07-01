@@ -410,7 +410,7 @@ def compute_switch_trades(rebal_df, new_xls, old_xls, fund_name_map):
             continue
 
         total_positive_delta = switch_in['delta'].sum()
-        in_list = switch_in.to_dict('records')
+        in_list = switch_in.to_dict('records')  # "records' in built method df to list of dicts
         n_in    = len(in_list)
 
         fdsrc  = 'SRS-IA' if port_type.endswith('_SRS') else 'Cash'
@@ -448,14 +448,14 @@ def compute_switch_trades(rebal_df, new_xls, old_xls, fund_name_map):
                 if new_w == 0:
                     units_out = qty                     # full switch
                 elif old_w > 0:
-                    units_out = round(((old_w - new_w) / old_w) * qty, 3)
+                    units_out = round(((old_w - new_w) / old_w) * qty, 3) # partial reduction
                 else:
                     continue
                 if units_out <= 0:
                     continue
 
                 # Implied price of switch-out fund (SGD per unit)
-                implied_price_so = (mkt_val / qty) if qty > 0 else 0
+                #implied_price_so = (mkt_val / qty) if qty > 0 else 0
 
                 # SO check columns — same for every SI destination row
                 r_val   = round(qty, 3)               # SO: Units before Rebal
