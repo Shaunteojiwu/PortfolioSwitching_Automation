@@ -39,10 +39,10 @@ BORDER              = Border(left=THIN, right=THIN, top=THIN, bottom=THIN)
 # ─────────────────────────────────────────────
 
 def create_root():
-    root = tk.Tk()
-    root.withdraw()
-    root.lift()
-    root.attributes("-topmost", True)
+    root = tk.Tk() # creates a temporary tkinter window, which is needed for the file dialog to work
+    root.withdraw()  # Hides the empty root window from the user, but it still exists in the background.
+    root.lift() # Brings the hidden window (and its dialogs) to the front.
+    root.attributes("-topmost", True) # Ensures dialogs appear above other windows.
     return root
 
 # ─────────────────────────────────────────────
@@ -264,6 +264,16 @@ def compute_switch_trades(rebal_df, new_xls, old_xls, fund_name_map):
             continue
 
         total_positive_delta = switch_in['delta'].sum()
+        total_negative_delta = abs(switch_out['delta'].sum())
+        
+          # Optional safety check
+        if round(total_positive_delta, 6) != round(total_negative_delta, 6):
+            print(
+                f"WARNING [{port_type}]: positive delta "
+                f"{total_positive_delta:.6f} does not equal negative delta "
+                f"{total_negative_delta:.6f}"
+            )
+            
         in_list = switch_in.to_dict('records')  # "records' in built method df to list of dicts
         n_in    = len(in_list)
 
@@ -320,7 +330,7 @@ def compute_switch_trades(rebal_df, new_xls, old_xls, fund_name_map):
                 x_val   = round(new_w * 100, 2)        # Target alloc SO (%)
                 y_val   = round(w_val - x_val, 2)      # Diff W-X
                 so_name = fund_name_map.get((mgr_out, fund_out), '')
-
+                
                 # Split proportionally across ALL switch-in funds
                 allocated = 0.0
                 for i, in_row in enumerate(in_list):
@@ -336,11 +346,15 @@ def compute_switch_trades(rebal_df, new_xls, old_xls, fund_name_map):
                         units_this  = round(
                             units_out * (delta_in / total_positive_delta), 3)
                         allocated  += units_this
+                        
+                    if units_this <= 0:
+                        continue
 
+                    order_type = 'SO' if mgr_out == mgr_in else 'ESO'
 
                     trade_rows.append({
                         'AccountNo':   acct_no,
-                        'OrderType':   'ESO',
+                        'OrderType':   order_type,
                         'MgrCd':       mgr_out,
                         'FundCd':      fund_out,
                         'FdSrc':       fdsrc,
@@ -537,7 +551,7 @@ if __name__ == "__main__":
 
     print("Loading files...")
     rebal_df = clean_df(load_excel_safe(rebalance_path))
-    new_xls  = pd.ExcelFile(new_alloc_path)
+    new_xls  = pd.ExcelFile(new_alloc_path) #creates an excel file object, which can be used to read multiple sheets
     old_xls  = pd.ExcelFile(old_alloc_path)
 
     rebal_df['svc_acct']  = rebal_df['svc_acct'].astype(str).str.strip()
@@ -546,11 +560,11 @@ if __name__ == "__main__":
 
     # Identify portfolio types that appear in both rebal input and both alloc files
     rebal_port_types  = set(rebal_df['port_type'].unique())
-    common_port_types = rebal_port_types & set(new_xls.sheet_names) & set(old_xls.sheet_names)
+    common_port_types = rebal_port_types & set(new_xls.sheet_names) & set(old_xls.sheet_names) #return those that intersect in all 3 sets
 
     # Filter to only port types with actual changes
     changed_port_types = []
-    for pt in sorted(common_port_types):
+    for pt in sorted(common_port_types): #alphabetical order
         deltas = compute_deltas(new_xls, old_xls, pt)
         if deltas is not None and not deltas.empty:
             changed_port_types.append(pt)
