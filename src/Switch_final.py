@@ -103,6 +103,37 @@ def clean_df(df):
     df.columns = [str(c).strip() for c in df.columns]
     return df
 
+#─────────────────────────────────────────────
+# MAPPING
+# ─────────────────────────────────────────────
+mapping={"HVP1" : "Cash",
+           "HVP2" : "Cash",
+           "HVP3" : "Cash",
+           "HVP_Income" : "Cash",
+           "HVP_Thematic" : "Cash",
+           "HVP Thematic" : "Cash",
+           "CBP" : "Cash",
+           "HVP2_SRS" : "SRS-IA",
+           "HVP3_SRS" : "SRS-IA",
+           "CBP_SRS" : "SRS-IA"}
+
+# def read_port_type(excel_file,column_req):
+#     for sheet in excel_file.sheets:
+#         if sheet=="SvcAcctSearchResul":
+#             excel_sheet= excel_file[sheet]
+#             df=pd.Dataframe(excel_sheet)
+#             header_row=df.loc[column_req]
+#             for i in header_row:
+#                 if i==column_req:
+#                   idx=i
+#                   data_row=df.iloc[1:,idx]
+            
+#             return data_row
+# def mapping(data_row,mapping):
+#     for i in data_row:
+    
+
+
 # ─────────────────────────────────────────────
 # ALLOCATION HELPERS
 # ─────────────────────────────────────────────
@@ -180,6 +211,53 @@ def build_fund_name_map(xls_list): #old and new excel file
                 continue
     return fmap
 
+def build_fund_source_lookup(eagle_df):
+    eagle_df = eagle_df.copy()
+    eagle_df.columns = [str(c).strip() for c in eagle_df.columns]
+
+    required_cols = ["Svc Acct No", "Fund Source"]
+    missing_cols = [c for c in required_cols if c not in eagle_df.columns]
+
+    if missing_cols:
+        raise ValueError(
+            f"Eagle Eye file is missing required columns: {missing_cols}"
+        )
+
+    eagle_df["Svc Acct No"] = (
+        eagle_df["Svc Acct No"]
+        .astype(str)
+        .str.strip()
+        .str.replace(r"\.0$", "", regex=True)
+        .str.zfill(7)
+    )
+
+    eagle_df["Fund Source"] = (
+        eagle_df["Fund Source"]
+        .astype(str)
+        .str.strip()
+    )
+
+    conflicting = (
+        eagle_df[eagle_df["Fund Source"] != ""]
+        .groupby("Svc Acct No")["Fund Source"]
+        .nunique()
+    )
+
+    conflicting = conflicting[conflicting > 1]
+
+    if not conflicting.empty:
+        raise ValueError(
+            "Some service accounts have more than one Fund Source in the "
+            f"Eagle Eye file: {conflicting.index.tolist()}"
+        )
+
+    return (
+        eagle_df
+        .drop_duplicates(subset="Svc Acct No", keep="first")
+        .set_index("Svc Acct No")["Fund Source"]
+        .to_dict()
+    )
+
 # ─────────────────────────────────────────────
 # DELTA CALCULATION
 # ─────────────────────────────────────────────
@@ -216,7 +294,7 @@ def compute_deltas(new_xls, old_xls, port_type):
 # ─────────────────────────────────────────────
 # CORE TRADE CALCULATION
 # ─────────────────────────────────────────────
-def compute_switch_trades(rebal_df, new_xls, old_xls, fund_name_map):
+def compute_switch_trades(rebal_df, new_xls, old_xls, fund_name_map,fund_source_lookup=None):
     """
     Pure many-to-many: every switch-out fund splits proportionally across
     ALL switch-in funds by their relative positive deltas.
@@ -277,7 +355,8 @@ def compute_switch_trades(rebal_df, new_xls, old_xls, fund_name_map):
         in_list = switch_in.to_dict('records')  # "records' in built method df to list of dicts
         n_in    = len(in_list)
 
-        fdsrc  = 'SRS-IA' if port_type.endswith('_SRS') else 'Cash'
+        #fdsrc  = 'SRS-IA' if port_type.endswith('_SRS') else 'Cash'
+        # fdsrc = mapping.get(port_type,"")
         divopt = 'Withdraw' if port_type.startswith('MD') else 'Reinvest'
 
         old_alloc = load_allocation(old_xls, port_type)
@@ -291,93 +370,101 @@ def compute_switch_trades(rebal_df, new_xls, old_xls, fund_name_map):
             rebal_df['port_type'] == port_type]['svc_acct'].unique()
 
         for acct_no in unique_accts:
+            if fund_source_lookup is not None:
+                fdsrc = fund_source_lookup.get(acct_no)
+                 # Otherwise fall back to the normal mapping
+                if not fdsrc:
+                    fdsrc = mapping.get(port_type, "")
+
+            else:
+                fdsrc = mapping.get(port_type, "")
             for _, out_row in switch_out.iterrows():
-                mgr_out  = out_row['mgr_code']
-                fund_out = out_row['fund_code']
-                key      = mgr_out + fund_out
+                    mgr_out  = out_row['mgr_code']
+                    fund_out = out_row['fund_code']
+                    key      = mgr_out + fund_out
 
-                rebal_row = rebal_lookup.get((acct_no, mgr_out, fund_out))
-                if rebal_row is None:
-                    continue
-                qty      = rebal_row['qty']
-                mkt_val  = rebal_row['mkt_val']
-                total_pf = rebal_row['total_pf']
-                if qty <= 0:
-                    continue
-
-                old_w = old_w_map.get(key, 0)
-                new_w = new_w_map.get(key, 0)
-
-                # Units switched out
-                if new_w == 0:
-                    units_out = qty                     # full switch
-                elif old_w > 0:
-                    units_out = round(((old_w - new_w) / old_w) * qty, 3) # partial reduction
-                else:
-                    continue
-                if units_out <= 0:
-                    continue
-
-                # SO check columns — same for every SI destination row
-                r_val   = round(qty, 3)               # SO: Units before Rebal
-                s_val   = round(units_out, 3)          # Total Units SO
-                t_val   = round(qty - units_out, 3)    # SO: Units Remaining
-                u_val   = round(mkt_val, 2)            # SO: MV before Rebal (SGD)
-                v_val   = round(total_pf, 2)           # Account Portfolio AUM
-                # W: SO Fund Weight after Rebal = ((T/R)*U)/V * 100
-                w_val   = round(((t_val / r_val) * u_val) / v_val * 100, 2) \
-                          if (r_val > 0 and v_val > 0) else 0.0
-                x_val   = round(new_w * 100, 2)        # Target alloc SO (%)
-                y_val   = round(w_val - x_val, 2)      # Diff W-X
-                so_name = fund_name_map.get((mgr_out, fund_out), '')
-                
-                # Split proportionally across ALL switch-in funds
-                allocated = 0.0
-                for i, in_row in enumerate(in_list):
-                    is_last    = (i == n_in - 1)
-                    mgr_in     = in_row['mgr_code']
-                    fund_in    = in_row['fund_code']
-                    delta_in   = in_row['delta']
-                    si_name    = fund_name_map.get((mgr_in, fund_in), '')
-
-                    if is_last:
-                        units_this = round(units_out - allocated, 3)
-                    else:
-                        units_this  = round(
-                            units_out * (delta_in / total_positive_delta), 3)
-                        allocated  += units_this
-                        
-                    if units_this <= 0:
+                    rebal_row = rebal_lookup.get((acct_no, mgr_out, fund_out))
+                    if rebal_row is None:
+                        continue
+                    qty      = rebal_row['qty']
+                    mkt_val  = rebal_row['mkt_val']
+                    total_pf = rebal_row['total_pf']
+                    if qty <= 0:
                         continue
 
-                    order_type = 'SO' if mgr_out == mgr_in else 'ESO'
+                    old_w = old_w_map.get(key, 0)
+                    new_w = new_w_map.get(key, 0)
 
-                    trade_rows.append({
-                        'AccountNo':   acct_no,
-                        'OrderType':   order_type,
-                        'MgrCd':       mgr_out,
-                        'FundCd':      fund_out,
-                        'FdSrc':       fdsrc,
-                        'SIMgrCd':     mgr_in,
-                        'SIFundCd':    fund_in,
-                        'NetSalesChg': 0,
-                        'SwChg':       0,
-                        'DivOpt':      divopt,
-                        'Units':       units_this,
-                        'FACode':      '',
-                        'TransDate':   today_str,
-                        'Portfolio Type':                               port_type,
-                        'Switch Out Fund Name':                         so_name,
-                        'Switch In Fund Name':                          si_name,
-                        'SO: Units before Rebalance':                   r_val,
-                        'Total Units SO':                               s_val,
-                        'SO: Units Remaining after Rebalance':          t_val,
-                        'SO: MV of Fund before Rebalance (SGD)':        u_val,
-                        'Account Portfolio Amount (SGD)':               v_val,
-                        'SO Fund Weight (%) after Rebalance':           w_val,
-                        'Target Allocation of Switch Out Fund (%)':     x_val,
-                        'Diff':                                         y_val,
-                    })
+                    # Units switched out
+                    if new_w == 0:
+                        units_out = qty                     # full switch
+                    elif old_w > 0:
+                        units_out = round(((old_w - new_w) / old_w) * qty, 3) # partial reduction
+                    else:
+                        continue
+                    if units_out <= 0:
+                        continue
+
+                    # SO check columns — same for every SI destination row
+                    r_val   = round(qty, 3)               # SO: Units before Rebal
+                    s_val   = round(units_out, 3)          # Total Units SO
+                    t_val   = round(qty - units_out, 3)    # SO: Units Remaining
+                    u_val   = round(mkt_val, 2)            # SO: MV before Rebal (SGD)
+                    v_val   = round(total_pf, 2)           # Account Portfolio AUM
+                    # W: SO Fund Weight after Rebal = ((T/R)*U)/V * 100
+                    w_val   = round(((t_val / r_val) * u_val) / v_val * 100, 2) \
+                            if (r_val > 0 and v_val > 0) else 0.0
+                    x_val   = round(new_w * 100, 2)        # Target alloc SO (%)
+                    y_val   = round(w_val - x_val, 2)      # Diff W-X
+                    so_name = fund_name_map.get((mgr_out, fund_out), '')
+                    
+                    # Split proportionally across ALL switch-in funds
+                    allocated = 0.0
+                    for i, in_row in enumerate(in_list):
+                        is_last    = (i == n_in - 1)
+                        mgr_in     = in_row['mgr_code']
+                        fund_in    = in_row['fund_code']
+                        delta_in   = in_row['delta']
+                        si_name    = fund_name_map.get((mgr_in, fund_in), '')
+
+                        if is_last:
+                            units_this = round(units_out - allocated, 3)
+                        else:
+                            units_this  = round(
+                                units_out * (delta_in / total_positive_delta), 3)
+                            allocated  += units_this
+                            
+                        if units_this <= 0:
+                            continue
+
+                        order_type = 'SO' if mgr_out == mgr_in else 'ESO'
+
+                        trade_rows.append({
+                            'AccountNo':   acct_no,
+                            'OrderType':   order_type,
+                            'MgrCd':       mgr_out,
+                            'FundCd':      fund_out,
+                            'FdSrc':       fdsrc,
+                            'SIMgrCd':     mgr_in,
+                            'SIFundCd':    fund_in,
+                            'NetSalesChg': 0,
+                            'SwChg':       0,
+                            'DivOpt':      divopt,
+                            'Units':       units_this,
+                            'FACode':      '',
+                            'TransDate':   today_str,
+                            'Portfolio Type':                               port_type,
+                            'Switch Out Fund Name':                         so_name,
+                            'Switch In Fund Name':                          si_name,
+                            'SO: Units before Rebalance':                   r_val,
+                            'Total Units SO':                               s_val,
+                            'SO: Units Remaining after Rebalance':          t_val,
+                            'SO: MV of Fund before Rebalance (SGD)':        u_val,
+                            'Account Portfolio Amount (SGD)':               v_val,
+                            'SO Fund Weight (%) after Rebalance':           w_val,
+                            'Target Allocation of Switch Out Fund (%)':     x_val,
+                            'Diff':                                         y_val,
+                        })
 
 
     return pd.DataFrame(trade_rows) if trade_rows else pd.DataFrame()
@@ -548,12 +635,63 @@ if __name__ == "__main__":
     old_alloc_path = prompt_file("Step 3: Old Allocation File")
     if not old_alloc_path:
         sys.exit()
+        
+    
+    # print("Do you have fund source mappin file") 
+    # ask_yes_no("yes","no")
+    #   if yes 
+    requires_eagle_eye_mapping = ask_yes_no(
+        "Eagle Eye Mapping",
+        "Do these accounts require Fund Source and DAAC mapping from Eagle Eye?"
+    )
 
+    fund_source_path = None
+
+    if requires_eagle_eye_mapping:
+        show_msg(
+            "Step 4",
+            "Select the Eagle Eye Fund Source and DAAC mapping file."
+        )
+
+        fund_source_path = prompt_file(
+            "Step 4: Eagle Eye Fund Source and DAAC Mapping File",
+            filetypes=[
+                ("Excel files", "*.xlsx *.xls *.xlsm"),
+                ("All files", "*.*"),
+            ],
+        )
+
+        if not fund_source_path:
+            show_msg(
+                "Cancelled",
+                "The mapping file is required for Eagle Eye accounts."
+            )
+            sys.exit()
+    
+    
+    # show_msg("Step 4", "Select Fund Source Mapping file")
+    # fund_source_path = prompt_file("Step 4: Fund Source Mapping File")
+    # if not fund_source_path:
+    #     sys.exit()
+    
+    
     print("Loading files...")
     rebal_df = clean_df(load_excel_safe(rebalance_path))
     new_xls  = pd.ExcelFile(new_alloc_path) #creates an excel file object, which can be used to read multiple sheets
     old_xls  = pd.ExcelFile(old_alloc_path)
+    # fund_source_xls = pd.ExcelFile(fund_source_path) #load fund source mapping file
+    fund_source_lookup = None
 
+    if requires_eagle_eye_mapping:
+
+        eagle_df = clean_df(
+            load_excel_safe(fund_source_path)
+        )
+
+        fund_source_lookup = build_fund_source_lookup(
+            eagle_df
+        )
+        
     rebal_df['svc_acct']  = rebal_df['svc_acct'].astype(str).str.strip()
     rebal_df['port_type'] = rebal_df['port_type'].astype(str).str.strip().str.replace(
         r'^T_', '', regex=True)
@@ -583,7 +721,7 @@ if __name__ == "__main__":
 
     # ── Compute trades ──
     print("Computing switch trades...")
-    trades_df = compute_switch_trades(rebal_df, new_xls, old_xls, fund_name_map)
+    trades_df = compute_switch_trades(rebal_df, new_xls, old_xls, fund_name_map,fund_source_lookup)
 
     if trades_df.empty:
         show_msg("No Trades",
